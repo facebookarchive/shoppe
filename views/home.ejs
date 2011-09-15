@@ -171,6 +171,13 @@
         <div>
           <h1><a href="/products/<%= id %>"><%= product.name %></a></h1>
           <h4><%= product.description %></h4>
+          <div>
+            <span>$<%= product.price.toFixed(2) %></span>
+            <form action="/buy" method="post">
+              <input type="hidden" name="product" value="<%= id %>" />
+              <button type="submit" >Buy</button>
+            </form>
+          </div>
         </div>
       <% } %>
     </section>
