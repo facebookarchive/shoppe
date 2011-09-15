@@ -210,6 +210,10 @@ header .tagline {
   border-right: 1px solid #b3b3b3;
 }
 
+#guides h4 {
+  margin-bottom: 15px;
+}
+
 #guides ul li {
   font-size: 11px;
   list-style: none;
