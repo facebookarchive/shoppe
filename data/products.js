@@ -19,7 +19,7 @@ exports.Products = {
   },
   coilovers: {
     name: 'Menske 4 way adjustable shocks',
-    decription: 'Independant compression and rebound adjustments with a threaded damper body',
+    description: 'Independant compression and rebound adjustments with a threaded damper body',
     thumb: 'coilover.jpg',
     price: 3000
   }
