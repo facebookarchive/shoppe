@@ -8,6 +8,8 @@ var facebook = new FacebookClient();
 
 var uuid = require('node-uuid');
 
+var products = require('./data/products').Products;
+
 // configure facebook authentication
 everyauth.facebook
   .appId(process.env.FACEBOOK_APP_ID)
@@ -114,6 +116,7 @@ app.get('/home', function(request, response) {
           token:    token,
           app:      app,
           user:     request.session.auth.facebook.user,
+          products: products
           home:     method + '://' + request.headers.host + '/',
           redirect: method + '://' + request.headers.host + request.url,
           socket_id: socket_id
