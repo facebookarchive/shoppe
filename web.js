@@ -107,20 +107,20 @@ app.get('/products/:product', function(request, response) {
   // detect the http method uses so we can replicate it on redirects
   var method = request.headers['x-forwarded-proto'] || 'http';
 
-  // if we have facebook auth credentials
-  if (request.session.auth) {
+  if (request.params.product) {
+    var product = products[request.params.product];
 
-    // generate a uuid for socket association
-    var socket_id = uuid();
-    
-  // initialize facebook-client with the access token to gain access
-  // to helper methods for the REST api
-    var token = request.session.auth.facebook.accessToken;
-    facebook.getSessionByAccessToken(token)(function(session) {
-      if (request.params.product) {
-        var product = products[request.params.product];
+    if (product) {
+      // if we have facebook auth credentials
+      if (request.session.auth) {
 
-        if (product) {
+      // generate a uuid for socket association
+      var socket_id = uuid();
+        
+      // initialize facebook-client with the access token to gain access
+      // to helper methods for the REST api
+        var token = request.session.auth.facebook.accessToken;
+        facebook.getSessionByAccessToken(token)(function(session) {
           //render product page
           response.render('product.ejs', {
             layout: false,
@@ -133,20 +133,18 @@ app.get('/products/:product', function(request, response) {
             redirect: method + '://' + request.headers.host + request.url,
             socket_id: socket_id
           });
-        } else {
-          // product does not exist!
-          response.redirect('/home');
-        }
+
+          return;
+        });
+      } else {
+        //not logged in
+        response.redirect('/');
       }
-      else {
-        // no product provided!
-        response.redirect('/home');
-      }
-    });
-  } else {
-    //not logged in
-    response.redirect('/');
+    }
   }
+  
+  // redirect in case there is no real product specified
+  response.redirect('/home');
 });
 
 //respond to POST /buy
