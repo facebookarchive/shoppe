@@ -170,6 +170,7 @@
            var product = products[id]; %>
         <div>
           <h1><a href="/products/<%= id %>"><%= product.name %></a></h1>
+          <img src="/images/<%= product.image %>" />
           <h4><%= product.description %></h4>
           <div>
             <form action="/buy" method="post">
