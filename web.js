@@ -133,17 +133,24 @@ app.get('/products/:product', function(request, response) {
           socket_id: socket_id
         });
       });
-
-      return;
+    } else {
+      // not logged in
+      response.render('product.ejs', {
+        layout: false,
+        token: null,
+        app: fbapp,
+        user: null,
+        product_id: request.params.product,
+        product: product,
+        home: method + '://' + request.headers.host + '/',
+        redirect: method + '://' + request.headers.host + request.url,
+        socket_id: socket_id
+      });
     }
-
-    //not logged in
-    response.redirect('/');
-    return;
+  } else {
+    // redirect in case there is no real product specified
+    response.redirect('/home');
   }
-  
-  // redirect in case there is no real product specified
-  response.redirect('/home');
 });
 
 //respond to POST /buy
@@ -157,8 +164,8 @@ app.post('/buy', function(request, response) {
     // generate a uuid for socket association
     var socket_id = uuid();
 
-  // initialize facebook-client with the access token to gain access
-  // to helper methods for the REST api
+    // initialize facebook-client with the access token to gain access
+    // to helper methods for the REST api
     var token = request.session.auth.facebook.accessToken;
     facebook.getSessionByAccessToken(token)(function(session) {
       if (request.body.product) {
