@@ -6,13 +6,13 @@ exports.Products = {
     price: 20
   },
   exhaust: {
-    name: 'Mega exhaust 9000',
+    name: 'Bobb Muning exhaust 9000',
     description: 'Makes your car sound angry bees in a tin can',
     image: 'fartcan.jpg',
     price: 500
   },
   camshaft: {
-    name: 'Ubertek Stage 2 camshaft',
+    name: 'Bosworth Stage 2 camshaft',
     description: 'Amazing power without a lopey idle',
     image: 'cams.jpg',
     price: 1000
