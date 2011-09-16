@@ -169,7 +169,7 @@ app.post('/buy', function(request, response) {
     var token = request.session.auth.facebook.accessToken;
     facebook.getSessionByAccessToken(token)(function(session) {
       if (request.body.product) {
-        var product = products[request.params.product];
+        var product = products[request.body.product];
 
         if (product) {
 
