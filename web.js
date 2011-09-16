@@ -134,7 +134,7 @@ app.get('/home', function(request, response) {
 });
 
 //respond to GET /product/{product}
-app.get('/product/{product}', function(request, response) {
+app.get('/products/{product}', function(request, response) {
   // detect the http method uses so we can replicate it on redirects
   var method = request.headers['x-forwarded-proto'] || 'http';
 
