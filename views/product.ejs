@@ -21,11 +21,12 @@
     <!-- over facebook.  You should fill these tags in with      -->
     <!-- your data.  To learn more about Open Graph, visit       -->
     <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content=""/>
-    <meta property="og:type" content=""/>
-    <meta property="og:url" content=""/>
-    <meta property="og:image" content=""/>
+    <meta property="og:title" content="<%= product.name %>"/>
+    <meta property="og:type" content="carshoppe:carpart"/>
+    <meta property="og:url" content="http://afternoon-dusk-6338.herokuapp.com/products/<%= product_id %>"/>
+    <meta property="og:image" content="http://afternoon-dusk-6338.herokuapp.com/images/<%= product.image %>"/>
     <meta property="og:site_name" content="Ye Olde Car Shoppe"/>
+    <meta property="og:description" content="<%= product.description"/>
     <meta property="fb:app_id" content="<%= app.id %>"/>
 
     <script src="/scripts/jquery.min.js"></script>
