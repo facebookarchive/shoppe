@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- We get the name of the app out of the information fetched -->
-    <title><%= app.name %> - <%= product.name %></title>
+    <title><%= app.name %></title>
     <link rel="stylesheet" href="/stylesheets/screen.css" media="screen">
 
     <!-- These are Open Graph tags.  They add meta data to your  -->
@@ -12,12 +12,12 @@
     <!-- over facebook.  You should fill these tags in with      -->
     <!-- your data.  To learn more about Open Graph, visit       -->
     <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content="<%= product.name %>"/>
-    <meta property="og:type" content="carshoppe:carpart"/>
-    <meta property="og:url" content="<%= home %>products/<%= product_id %>"/>
-    <meta property="og:image" content="<%= home %>images/<%= product.image %>"/>
+    <meta property="og:title" content="You just bought stuff"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:url" content="<%= home %>buy"/>
+    <meta property="og:image" content=""/>
     <meta property="og:site_name" content="Ye Olde Car Shoppe"/>
-    <meta property="og:description" content="<%= product.description %>"/>
+    <meta property="og:description" content="You just bought cool stuff"/>
     <meta property="fb:app_id" content="<%= app.id %>"/>
 
     <script src="/scripts/jquery.min.js"></script>
@@ -86,26 +86,13 @@
 
     <section id="guides" class="clearfix">
       <div>
-        <h1><%= product.name %></h1>
+        <h1>You just bought <%= product.name %></h1>
         <div class="image">
           <img src="/images/<%= product.image %>" />
         </div>
-        <h4><%= product.description %></h4>
+        <h4>Congrats...share this with your friends!</h4>
         <div>
-          <form action="/buy" method="post">
-            <span>$<%= product.price.toFixed(2) %></span>
-            <input type="hidden" name="product" value="<%= product_id %>" />
-            <button type="submit" >Buy</button>
-          </form>
         </div>
-      </div>
-    </section>
-
-    <section id="socialreviews" class="clearfix">
-      <h1>Reviews</h1>
-
-      <div class="list">
-        <ul id="reviews"></ul>
       </div>
     </section>
   </body>

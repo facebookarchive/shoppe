@@ -25,6 +25,7 @@ everyauth.facebook
 var app = express.createServer(
   express.logger(),
   express.static(__dirname + '/public'),
+  express.bodyParser(),
   express.cookieParser(),
   // set this to a secret value to encrypt session cookies
   express.session({ secret: process.env.SESSION_SECRET || 'secret123' }),
@@ -161,6 +162,56 @@ app.get('/products/:product', function(request, response) {
               app: app,
               user: request.session.auth.facebook.user,
               product_id: request.params.product,
+              product: product,
+              home: method + '://' + request.headers.host + '/',
+              redirect: method + '://' + request.headers.host + request.url,
+              socket_id: socket_id
+            });
+          });
+        } else {
+          // product does not exist!
+          response.redirect('/home');
+        }
+      }
+      else {
+        // no product provided!
+        response.redirect('/home');
+      }
+    });
+  } else {
+    //not logged in
+    response.redirect('/');
+  }
+});
+
+//respond to POST /buy
+app.post('/buy', function(request, response) {
+  // detect the http method uses so we can replicate it on redirects
+  var method = request.headers['x-forwarded-proto'] || 'http';
+
+  // if we have facebook auth credentials
+  if (request.session.auth) {
+
+    // generate a uuid for socket association
+    var socket_id = uuid();
+
+  // initialize facebook-client with the access token to gain access
+  // to helper methods for the REST api
+    var token = request.session.auth.facebook.accessToken;
+    facebook.getSessionByAccessToken(token)(function(session) {
+      if (request.body.product) {
+        var product = products[request.params.product];
+
+        if (product) {
+
+          session.graphCall('/' + process.env.FACEBOOK_APP_ID)(function(app) {
+            //render product page
+            response.render('buy.ejs', {
+              layout: false,
+              token: token,
+              app: app,
+              user: request.session.auth.facebook.user,
+              product_id: request.body.product,
               product: product,
               home: method + '://' + request.headers.host + '/',
               redirect: method + '://' + request.headers.host + request.url,
