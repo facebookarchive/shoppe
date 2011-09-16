@@ -11,8 +11,8 @@ var uuid = require('node-uuid');
 var products = require('./data/products').Products;
 
 var fbapp = {
-  name = 'Ye Olde Car Shoppe',
-  id = process.env.FACEBOOK_APP_ID
+  name: 'Ye Olde Car Shoppe',
+  id: process.env.FACEBOOK_APP_ID
 };
 
 // configure facebook authentication
