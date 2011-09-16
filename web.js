@@ -132,3 +132,34 @@ app.get('/home', function(request, response) {
 
   }
 });
+
+//respond to GET /product/{product}
+app.get('/product/{product}', function(request, response) {
+  // detect the http method uses so we can replicate it on redirects
+  var method = request.headers['x-forwarded-proto'] || 'http';
+
+  if (req.params.product) {
+    var product = products[req.params.product];
+
+    if (product) {
+      //render product page
+      response.render('product.ejs', {
+        layout: false,
+        token: token,
+        app: app,
+        user: request.session.auth.facebook.user,
+        product: product,
+        home: method + '://' + request.headers.host + '/',
+        redirect: method + '://' + request.headers.host + request.url,
+        socket_id: socket_id
+      });
+    } else {
+      // product does not exist!
+      response.redirect('/home');
+    }
+  }
+  else {
+    // no product provided!
+    response.redirect('/home');
+  }
+});
