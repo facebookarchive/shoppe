@@ -158,7 +158,7 @@ app.get('/products/:product', function(request, response) {
             token: token,
             app: app,
             user: request.session.auth.facebook.user,
-            product_id = request.params.product,
+            product_id: request.params.product,
             product: product,
             home: method + '://' + request.headers.host + '/',
             redirect: method + '://' + request.headers.host + request.url,
