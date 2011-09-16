@@ -90,15 +90,14 @@ app.get('/home', function(request, response) {
         user: request.session.auth.facebook.user,
         products: products,
         home: method + '://' + request.headers.host + '/',
-        redirect: method + '://' + request.headers.host + request.url,          socket_id: socket_id
+        redirect: method + '://' + request.headers.host + request.url,
+        socket_id: socket_id
       });
     });
 
   } else {
-
     // not authenticated, redirect to / for everyauth to begin authentication
     response.redirect('/');
-
   }
 });
 

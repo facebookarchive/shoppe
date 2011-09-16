@@ -52,6 +52,17 @@
     <![endif]-->
   </head>
   <body>
+    <div id="fb-root"></div>
+    <script>
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <% if (user) { %>
       <header class="clearfix">
         <!-- By passing a valid access token here, we are able to display -->
@@ -83,6 +94,13 @@
     <section id="guides" class="clearfix">
       <div>
         <h1><%= product.name %></h1>
+        <div
+          class="fb-like"
+          data-href="<%= home %>products/<%= product_id %>"
+          data-send="true"
+          data-width="500"
+          data-show-faces="true">
+        </div>
         <div class="image">
           <img src="/images/<%= product.image %>" />
         </div>
