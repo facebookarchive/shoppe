@@ -10,6 +10,11 @@ var uuid = require('node-uuid');
 
 var products = require('./data/products').Products;
 
+var fbapp = {
+  name = 'Ye Olde Car Shoppe',
+  id = process.env.FACEBOOK_APP_ID
+};
+
 // configure facebook authentication
 everyauth.facebook
   .appId(process.env.FACEBOOK_APP_ID)
@@ -77,21 +82,15 @@ app.get('/home', function(request, response) {
       // generate a uuid for socket association
       var socket_id = uuid();
 
-      // get information about the app itself
-      session.graphCall('/' + process.env.FACEBOOK_APP_ID)(function(app) {
-
-        // render the home page
-        response.render('home.ejs', {
-          layout:   false,
-          token:    token,
-          app:      app,
-          user:     request.session.auth.facebook.user,
-          products: products,
-          home:     method + '://' + request.headers.host + '/',
-          redirect: method + '://' + request.headers.host + request.url,
-          socket_id: socket_id
-        });
-
+      // render the home page
+      response.render('home.ejs', {
+        layout:   false,
+        token:    token,
+        app:      app,
+        user:     request.session.auth.facebook.user,
+        products: products,
+        home:     method + '://' + request.headers.host + '/',
+        redirect: method + '://' + request.headers.host + request.url,          socket_id: socket_id
       });
     });
 
@@ -122,20 +121,17 @@ app.get('/products/:product', function(request, response) {
         var product = products[request.params.product];
 
         if (product) {
-
-          session.graphCall('/' + process.env.FACEBOOK_APP_ID)(function(app) {
-            //render product page
-            response.render('product.ejs', {
-              layout: false,
-              token: token,
-              app: app,
-              user: request.session.auth.facebook.user,
-              product_id: request.params.product,
-              product: product,
-              home: method + '://' + request.headers.host + '/',
-              redirect: method + '://' + request.headers.host + request.url,
-              socket_id: socket_id
-            });
+          //render product page
+          response.render('product.ejs', {
+            layout: false,
+            token: token,
+            app: app,
+            user: request.session.auth.facebook.user,
+            product_id: request.params.product,
+            product: product,
+            home: method + '://' + request.headers.host + '/',
+            redirect: method + '://' + request.headers.host + request.url,
+            socket_id: socket_id
           });
         } else {
           // product does not exist!
@@ -172,20 +168,17 @@ app.post('/buy', function(request, response) {
         var product = products[request.body.product];
 
         if (product) {
-
-          session.graphCall('/' + process.env.FACEBOOK_APP_ID)(function(app) {
-            //render product page
-            response.render('buy.ejs', {
-              layout: false,
-              token: token,
-              app: app,
-              user: request.session.auth.facebook.user,
-              product_id: request.body.product,
-              product: product,
-              home: method + '://' + request.headers.host + '/',
-              redirect: method + '://' + request.headers.host + request.url,
-              socket_id: socket_id
-            });
+          //render product page
+          response.render('buy.ejs', {
+            layout: false,
+            token: token,
+            app: app,
+            user: request.session.auth.facebook.user,
+            product_id: request.body.product,
+            product: product,
+            home: method + '://' + request.headers.host + '/',
+            redirect: method + '://' + request.headers.host + request.url,
+            socket_id: socket_id
           });
         } else {
           // product does not exist!
