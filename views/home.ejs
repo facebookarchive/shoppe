@@ -39,12 +39,9 @@
       var socket = io.connect();
 
       socket.on('connect', function() {
-
         // identify this socket with our auth token
         socket.emit('auth', '<%= socket_id %>');
-
       });
-
     </script>
     <!--[if IE]>
       <script>
