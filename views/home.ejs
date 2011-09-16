@@ -43,55 +43,6 @@
         // identify this socket with our auth token
         socket.emit('auth', '<%= socket_id %>');
 
-        // when a friend is received from the backend, add it to the page
-        socket.on('friend', function(friend) {
-          $('ul#friends').append('                                                                         \
-            <li>                                                                                           \
-              <a href="#" onclick="window.open(\'http://www.facebook.com/' + friend.id + '\');">           \
-                <img src="https://graph.facebook.com/' + friend.id + '/picture" alt="' + friend.name + '"> \
-                ' + friend.name + '                                                                        \
-              </a>                                                                                         \
-            </li>                                                                                          \
-          ');
-        });
-
-        // when a photo is received from the backend, add it to the page
-        socket.on('photo', function(photo) {
-          $('ul#photos').append('                                     \
-            <li style="background-image: url(' + photo.picture + ')"> \
-              <a href="#" onclick="window.open(\'http://www.facebook.com/' + photo.id + '\');">     \
-              ' + photo.name + '                                      \
-              </a>                                                    \
-            </li>                                                     \
-          ');
-
-          $('ul#photos li:nth-child(4n+1)').addClass('first-column');
-        });
-
-        // when a like is received from the backend, add it to the page
-        socket.on('like', function(like) {
-          $('ul#likes').append('                                   \
-            <li>                                                   \
-              <a href="http://www.facebook.com/' + like.id + '">   \
-                <img src="https://graph.facebook.com/' + like.id +
-                '/picture?type=square" alt="' + like.name + '">    \
-                ' + like.name + '                                  \
-              </a>                                                 \
-            </li>                                                  \
-          ');
-        });
-
-        // when a friend is received from the backend, add it to the page
-        socket.on('friend_using_app', function(friend) {
-          $('ul#friends_using_app').append('                                                    \
-            <li>                                                                                \
-              <a href="" onclick="window.open(\'http://www.facebook.com/' + friend.uid + '\');"> \
-                <img src="' + friend.pic_square + '" alt="' + friend.name + '">                 \
-                ' + friend.name + '                                                             \
-              </a>                                                                              \
-            </li>                                                                               \
-          ');
-        });
       });
 
     </script>
@@ -132,30 +83,6 @@
         </div>
       </div>
     </header>
-
-    <section id="samples" class="clearfix">
-      <h1>Examples of the Facebook Graph API</h1>
-
-      <div class="list">
-        <h3>A few of your friends</h3>
-        <ul id="friends"></ul>
-      </div>
-
-      <div class="list inline">
-        <h3>Recent photos</h3>
-        <ul id="photos"></ul>
-      </div>
-
-      <div class="list">
-        <h3>Things you like</h3>
-        <ul id="likes"></ul>
-      </div>
-
-      <div class="list">
-        <h3>Friends using this app</h3>
-        <ul id="friends_using_app"></ul>
-      </div>
-    </section>
 
     <section id="guides" class="clearfix">
       <% for (var id in products) { 
