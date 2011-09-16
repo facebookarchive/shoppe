@@ -152,17 +152,20 @@ app.get('/products/:product', function(request, response) {
         var product = products[request.params.product];
 
         if (product) {
-          //render product page
-          response.render('product.ejs', {
-            layout: false,
-            token: token,
-            app: app,
-            user: request.session.auth.facebook.user,
-            product_id: request.params.product,
-            product: product,
-            home: method + '://' + request.headers.host + '/',
-            redirect: method + '://' + request.headers.host + request.url,
-            socket_id: socket_id
+
+          session.graphCall('/' + process.env.FACEBOOK_APP_ID)(function(app) {
+            //render product page
+            response.render('product.ejs', {
+              layout: false,
+              token: token,
+              app: app,
+              user: request.session.auth.facebook.user,
+              product_id: request.params.product,
+              product: product,
+              home: method + '://' + request.headers.host + '/',
+              redirect: method + '://' + request.headers.host + request.url,
+              socket_id: socket_id
+            });
           });
         } else {
           // product does not exist!
