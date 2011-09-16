@@ -169,11 +169,11 @@
       <% for (var id in products) { 
            var product = products[id]; %>
         <div>
-          <h1><a href="/products/<%= id %?ref=title>">
+          <h1><a href="/products/<%= id %>?ref=title">
             <%= product.name %>
           </a></h1>
           <div class="image">
-            <a href="/products/<%= id %?ref=image>">
+            <a href="/products/<%= id %>?ref=image">
               <img src="/images/<%= product.image %>" />
             </a>
           </div>
