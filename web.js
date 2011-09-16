@@ -138,8 +138,8 @@ app.get('/products/:product', function(request, response) {
   // detect the http method uses so we can replicate it on redirects
   var method = request.headers['x-forwarded-proto'] || 'http';
 
-  if (req.params.product) {
-    var product = products[req.params.product];
+  if (request.params.product) {
+    var product = products[request.params.product];
 
     if (product) {
       //render product page
