@@ -84,12 +84,12 @@ app.get('/home', function(request, response) {
 
       // render the home page
       response.render('home.ejs', {
-        layout:   false,
-        token:    token,
-        app:      app,
-        user:     request.session.auth.facebook.user,
+        layout: false,
+        token: token,
+        app: fbapp,
+        user: request.session.auth.facebook.user,
         products: products,
-        home:     method + '://' + request.headers.host + '/',
+        home: method + '://' + request.headers.host + '/',
         redirect: method + '://' + request.headers.host + request.url,          socket_id: socket_id
       });
     });
@@ -125,7 +125,7 @@ app.get('/products/:product', function(request, response) {
           response.render('product.ejs', {
             layout: false,
             token: token,
-            app: app,
+            app: fbapp,
             user: request.session.auth.facebook.user,
             product_id: request.params.product,
             product: product,
@@ -172,7 +172,7 @@ app.post('/buy', function(request, response) {
           response.render('buy.ejs', {
             layout: false,
             token: token,
-            app: app,
+            app: fbapp,
             user: request.session.auth.facebook.user,
             product_id: request.body.product,
             product: product,
