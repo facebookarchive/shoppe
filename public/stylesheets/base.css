@@ -219,7 +219,7 @@ header .tagline {
 }
 
 #guides .image img {
-  widthL 100%;
+  width: 100%;
 }
 
 #guides ul li {
