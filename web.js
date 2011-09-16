@@ -107,40 +107,39 @@ app.get('/products/:product', function(request, response) {
   // detect the http method uses so we can replicate it on redirects
   var method = request.headers['x-forwarded-proto'] || 'http';
 
-  if (request.params.product) {
+  // if a product is supplied
+  if (request.params.product && products[request.params.product]) {
     var product = products[request.params.product];
 
-    if (product) {
-      // if we have facebook auth credentials
-      if (request.session.auth) {
-        // generate a uuid for socket association
-        var socket_id = uuid();
-        
-        // initialize facebook-client with the access token to gain access
-        // to helper methods for the REST api
-        var token = request.session.auth.facebook.accessToken;
-        facebook.getSessionByAccessToken(token)(function(session) {
-          //render product page
-          response.render('product.ejs', {
-            layout: false,
-            token: token,
-            app: fbapp,
-            user: request.session.auth.facebook.user,
-            product_id: request.params.product,
-            product: product,
-            home: method + '://' + request.headers.host + '/',
-            redirect: method + '://' + request.headers.host + request.url,
-            socket_id: socket_id
-          });
-
-          return;
+    // if we have facebook auth credentials
+    if (request.session.auth) {
+      // generate a uuid for socket association
+      var socket_id = uuid();
+      
+      // initialize facebook-client with the access token to gain access
+      // to helper methods for the REST api
+      var token = request.session.auth.facebook.accessToken;
+      facebook.getSessionByAccessToken(token)(function(session) {
+        //render product page
+        response.render('product.ejs', {
+          layout: false,
+          token: token,
+          app: fbapp,
+          user: request.session.auth.facebook.user,
+          product_id: request.params.product,
+          product: product,
+          home: method + '://' + request.headers.host + '/',
+          redirect: method + '://' + request.headers.host + request.url,
+          socket_id: socket_id
         });
-      } else {
-        //not logged in
-        response.redirect('/');
+
         return;
-      }
+      });
     }
+
+    //not logged in
+    response.redirect('/');
+    return;
   }
   
   // redirect in case there is no real product specified
