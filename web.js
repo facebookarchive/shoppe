@@ -138,28 +138,40 @@ app.get('/products/:product', function(request, response) {
   // detect the http method uses so we can replicate it on redirects
   var method = request.headers['x-forwarded-proto'] || 'http';
 
-  if (request.params.product) {
-    var product = products[request.params.product];
+  // if we have facebook auth credentials
+  if (request.session.auth) {
+  
+  // initialize facebook-client with the access token to gain access
+  // to helper methods for the REST api
+    var token = request.session.auth.facebook.accessToken;
+    facebook.getSessionByAccessToken(token)(function(session) {
+      if (request.params.product) {
+        var product = products[request.params.product];
 
-    if (product) {
-      //render product page
-      response.render('product.ejs', {
-        layout: false,
-        token: token,
-        app: app,
-        user: request.session.auth.facebook.user,
-        product: product,
-        home: method + '://' + request.headers.host + '/',
-        redirect: method + '://' + request.headers.host + request.url,
-        socket_id: socket_id
-      });
-    } else {
-      // product does not exist!
-      response.redirect('/home');
-    }
-  }
-  else {
-    // no product provided!
-    response.redirect('/home');
+        if (product) {
+          //render product page
+          response.render('product.ejs', {
+            layout: false,
+            token: token,
+            app: app,
+            user: request.session.auth.facebook.user,
+            product: product,
+            home: method + '://' + request.headers.host + '/',
+            redirect: method + '://' + request.headers.host + request.url,
+            socket_id: socket_id
+          });
+        } else {
+          // product does not exist!
+          response.redirect('/home');
+        }
+      }
+      else {
+        // no product provided!
+        response.redirect('/home');
+      }
+    });
+  } else {
+    //not logged in
+    response.redirect('/');
   }
 });
