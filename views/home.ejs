@@ -169,10 +169,12 @@
       <% for (var id in products) { 
            var product = products[id]; %>
         <div>
-          <h1><a href="/products/<%= id %>"><%= product.name %></a></h1>
-          <div class="image">
-            <img src="/images/<%= product.image %>" />
-          </div>
+          <a href="/products/<%= id %>">
+            <h1><%= product.name %></h1>
+            <div class="image">
+              <img src="/images/<%= product.image %>" />
+            </div>
+          </a>
           <h4><%= product.description %></h4>
           <div>
             <form action="/buy" method="post">
