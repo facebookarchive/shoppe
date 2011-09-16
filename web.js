@@ -113,12 +113,11 @@ app.get('/products/:product', function(request, response) {
     if (product) {
       // if we have facebook auth credentials
       if (request.session.auth) {
-
-      // generate a uuid for socket association
-      var socket_id = uuid();
+        // generate a uuid for socket association
+        var socket_id = uuid();
         
-      // initialize facebook-client with the access token to gain access
-      // to helper methods for the REST api
+        // initialize facebook-client with the access token to gain access
+        // to helper methods for the REST api
         var token = request.session.auth.facebook.accessToken;
         facebook.getSessionByAccessToken(token)(function(session) {
           //render product page
@@ -139,6 +138,7 @@ app.get('/products/:product', function(request, response) {
       } else {
         //not logged in
         response.redirect('/');
+        return;
       }
     }
   }
