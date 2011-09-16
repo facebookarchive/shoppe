@@ -7,7 +7,7 @@ exports.Products = {
   },
   exhaust: {
     name: 'Bobb Muning exhaust 9000',
-    description: 'Makes your car sound angry bees in a tin can',
+    description: 'Makes your car sound like angry bees in a tin can',
     image: 'fartcan.jpg',
     price: 500
   },
