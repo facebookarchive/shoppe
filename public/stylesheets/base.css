@@ -214,6 +214,14 @@ header .tagline {
   margin-bottom: 15px;
 }
 
+#guides .image {
+  width: 400px;
+}
+
+#guides .image img {
+  widthL 100%;
+}
+
 #guides ul li {
   font-size: 11px;
   list-style: none;
