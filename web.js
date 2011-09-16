@@ -132,9 +132,9 @@ app.get('/products/:product', function(request, response) {
           redirect: method + '://' + request.headers.host + request.url,
           socket_id: socket_id
         });
-
-        return;
       });
+
+      return;
     }
 
     //not logged in
