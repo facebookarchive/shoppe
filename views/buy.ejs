@@ -86,6 +86,7 @@
         </div>
         <div>
           <form action="/checkout" method="post">
+            <span>$<%= product.price.toFixed(2) %></span>
             <input type="hidden" name="product" value="<%= product_id %>" />
             <label>If you have a coupon, enter it here:</label>
             <input type="text" name="coupom" />
