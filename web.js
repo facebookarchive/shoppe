@@ -152,7 +152,7 @@ app.get('/products/:product', function(request, response) {
 });
 
 //respond to GET /coupon/{coupon}
-app.get('/couponss/facebook', function(request, response) {
+app.get('/coupons/facebook', function(request, response) {
   // detect the http method uses so we can replicate it on redirects
   var method = request.headers['x-forwarded-proto'] || 'http';
 
