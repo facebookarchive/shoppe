@@ -158,7 +158,8 @@ app.get('/couponss/facebook', function(request, response) {
 
   var coupon = {
     code: 'facebook',
-    description: 'Free shipping on all products'
+    name: 'Free shipping on all products',
+    description: 'Enjoy this coupon, some of this stuff is heavy!'
   };
 
   // if we have facebook auth credentials

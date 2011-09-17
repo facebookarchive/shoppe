@@ -12,7 +12,7 @@
     <!-- over facebook.  You should fill these tags in with      -->
     <!-- your data.  To learn more about Open Graph, visit       -->
     <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content="Coupon Code: <%= coupon.code %>"/>
+    <meta property="og:title" content="<%= coupon.code %> - <%= coupon.name %>"/>
     <meta property="og:type" content="carshoppe:coupon"/>
     <meta property="og:url" content="<%= home %>coupons/<%= coupon.code %>"/>
     <meta property="og:image" content=""/>
@@ -93,7 +93,8 @@
 
     <section id="guides" class="clearfix">
       <div>
-        <h1><%= coupon.code %> - <%= coupon.description %></h1>
+        <h1><%= coupon.code %> - <%= coupon.name %></h1>
+        <h4><%= coupon.description %></h4>
         <div
           class="fb-like"
           data-href="<%= home %>coupons/<%= coupon.code %>"
