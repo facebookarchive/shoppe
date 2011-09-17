@@ -86,10 +86,10 @@
         </div>
         <div>
           <form action="/checkout" method="post">
-            <span>$<%= product.price.toFixed(2) %></span>
+            <span>$<%= product.price.toFixed(2) %></span><br />
             <input type="hidden" name="product" value="<%= product_id %>" />
-            <span>If you have a coupon, enter it here:</span>
-            <input type="text" name="coupom" />
+            <label for="coupon">If you have a coupon, enter it here:</label>
+            <input type="text" name="coupon" />
             <button type="submit" >Checkout</button>
           </form>
         </div>
