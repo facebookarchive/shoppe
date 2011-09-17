@@ -278,7 +278,8 @@ app.post('/checkout', function(request, response) {
               product: product,
               home: method + '://' + request.headers.host + '/',
               redirect: method + '://' + request.headers.host + request.url,
-              socket_id: socket_id
+              socket_id: socket_id,
+              coupon: true
             });
           });
         } else {
@@ -292,7 +293,8 @@ app.post('/checkout', function(request, response) {
             product: product,
             home: method + '://' + request.headers.host + '/',
             redirect: method + '://' + request.headers.host + request.url,
-            socket_id: socket_id
+            socket_id: socket_id,
+            coupon: false
           });
         }
       } 
