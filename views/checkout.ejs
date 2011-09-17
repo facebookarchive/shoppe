@@ -80,17 +80,12 @@
 
     <section id="guides" class="clearfix">
       <div>
-        <h1>Make the purchase!: <%= product.name %></h1>
+        <h1>You just bought: <%= product.name %></h1>
         <div class="image">
           <img src="/images/<%= product.image %>" />
         </div>
+        <h4>Congrats...share this with your friends!</h4>
         <div>
-          <form action="/purchase" method="post">
-            <input type="hidden" name="product" value="<%= product_id %>" />
-            <label>If you have a coupon, enter it here:</label>
-            <input type="text" name="coupom" />
-            <button type="submit" >Checkout</button>
-          </form>
         </div>
       </div>
     </section>
