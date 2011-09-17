@@ -271,6 +271,16 @@ app.post('/checkout', function(request, response) {
           });
         }
 
+        session.graphCall(
+          '/me/carshoppe:purchase',
+          {
+            carpart: method + '://' + request.headers.host +
+                     'products/' + request.body.product
+          },
+          'POST'
+        )(function(result) {
+        });
+
         //render product page
         response.render('checkout.ejs', {
           layout: false,
