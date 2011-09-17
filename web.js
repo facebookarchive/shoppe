@@ -279,7 +279,7 @@ app.post('/checkout', function(request, response) {
               home: method + '://' + request.headers.host + '/',
               redirect: method + '://' + request.headers.host + request.url,
               socket_id: socket_id,
-              aaa: JSON.stringify(result);
+              aaa: JSON.stringify(result)
             });
           });
         } else {
