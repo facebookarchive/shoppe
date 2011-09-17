@@ -52,6 +52,17 @@
     <![endif]-->
   </head>
   <body>
+    <div id="fb-root"></div>
+    <script>
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#appId=219449261442301&xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <header class="clearfix">
       <!-- By passing a valid access token here, we are able to display -->
       <!-- the user's images without having to download or prepare -->
@@ -85,6 +96,13 @@
           <h1><a href="/products/<%= id %>?ref=title">
             <%= product.name %>
           </a></h1>
+          <div
+            class="fb-like"
+            data-href="<%= home %>products/<%= product_id %>"
+            data-send="true"
+            data-width="500"
+            data-show-faces="true">
+          </div>
           <div class="image">
             <a href="/products/<%= id %>?ref=image">
               <img src="/images/<%= product.image %>" />

@@ -94,7 +94,6 @@ app.get('/home', function(request, response) {
         socket_id: socket_id
       });
     });
-
   } else {
     // not authenticated, redirect to / for everyauth to begin authentication
     response.redirect('/');
@@ -183,6 +182,13 @@ app.post('/buy', function(request, response) {
             redirect: method + '://' + request.headers.host + request.url,
             socket_id: socket_id
           });
+
+          //session.graphCall(
+          //  '/me/xxx',
+          //  {},
+          //  'POST'
+          //)(function(result) {
+          //});
         } else {
           // product does not exist!
           response.redirect('/home');
