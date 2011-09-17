@@ -213,7 +213,7 @@ app.post('/checkout', function(request, response) {
         var coupon = request.body.coupon;
 
         //render product page
-        response.render('buy.ejs', {
+        response.render('checkout.ejs', {
           layout: false,
           token: token,
           app: fbapp,
