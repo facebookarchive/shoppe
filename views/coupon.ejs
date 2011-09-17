@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+
+    <!-- We get the name of the app out of the information fetched -->
+    <title><%= app.name %> - <%= product.name %></title>
+    <link rel="stylesheet" href="/stylesheets/screen.css" media="screen">
+
+    <!-- These are Open Graph tags.  They add meta data to your  -->
+    <!-- site that facebook uses when your content is shared     -->
+    <!-- over facebook.  You should fill these tags in with      -->
+    <!-- your data.  To learn more about Open Graph, visit       -->
+    <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
+    <meta property="og:title" content="Coupon Code: <%= coupon.code %>"/>
+    <meta property="og:type" content="carshoppe:coupon"/>
+    <meta property="og:url" content="<%= home %>coupons/<%= coupon.code %>"/>
+    <meta property="og:image" content=""/>
+    <meta property="og:site_name" content="Ye Olde Car Shoppe"/>
+    <meta property="og:description" content="<%= coupon.description %>"/>
+    <meta property="fb:app_id" content="<%= app.id %>"/>
+
+    <script src="/scripts/jquery.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script type="text/javascript">
+
+      function popup(pageURL, title,w,h) {
+        var left = (screen.width/2)-(w/2);
+        var top = (screen.height/2)-(h/2);
+        var targetWin = window.open(
+          pageURL,
+          title,
+          'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width='+w+', height='+h+', top='+top+', left='+left
+          );
+      }
+
+      // open a socket.io connection to the backend
+      var socket = io.connect();
+
+      socket.on('connect', function() {
+        // identify this socket with our auth token
+        socket.emit('auth', '<%= socket_id %>');
+      });
+    </script>
+    <!--[if IE]>
+      <script>
+        var tags = ['header', 'section'];
+        while(tags.length)
+          document.createElement(tags.pop());
+      </script>
+    <![endif]-->
+  </head>
+  <body>
+    <div id="fb-root"></div>
+    <script>
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/all.js#appId=219449261442301&xfbml=1";
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
+    <% if (user) { %>
+      <header class="clearfix">
+        <!-- By passing a valid access token here, we are able to display -->
+        <!-- the user's images without having to download or prepare -->
+        <!-- them ahead of time -->
+        <p id="picture" style="background-image: url(https://graph.facebook.com/me/picture?type=normal&access_token=<%= token %>)"></p>
+        <div>
+          <h1>Interesting selection, <strong><%= user.name %></strong></h1>
+          <p class="tagline"><%= app.name %></p>
+          <div id="share-app">
+            <p>Share your app:</p>
+            <ul>
+              <li>
+                <a href="#" class="facebook-button" onclick="popup('http://www.facebook.com/dialog/feed?redirect_uri=<%= redirect %>&display=popup&app_id=<%= app.id %>', 'Post to Wall', 580, 400);">
+                  <span class="plus">Post to Wall</span>
+                </a>
+              </li>
+              <li>
+              <a href="#" class="facebook-button speech-bubble" onclick="popup('https://www.facebook.com/dialog/send?redirect_uri=<%= redirect %>&display=popup&app_id=<%= app.id %>&link=<%= home %>', 'Send', 580, 400);">
+                  <span class="speech-bubble">Send to Friends</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </header>
+    <% } %>
+
+    <section id="guides" class="clearfix">
+      <div>
+        <h1><%= coupon.code %> - <%= coupon.description %></h1>
+        <div
+          class="fb-like"
+          data-href="<%= home %>coupons/<%= coupon.code %>"
+          data-send="true"
+          data-width="500"
+          data-show-faces="true">
+        </div>
+      </div>
+    </section>
+
+  </body>
+</html>

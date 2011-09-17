@@ -151,6 +151,52 @@ app.get('/products/:product', function(request, response) {
   }
 });
 
+//respond to GET /coupon/{coupon}
+app.get('/couponss/facebook', function(request, response) {
+  // detect the http method uses so we can replicate it on redirects
+  var method = request.headers['x-forwarded-proto'] || 'http';
+
+  var coupon = {
+    code: 'facebook',
+    description: 'Free shipping on all products'
+  };
+
+  // if we have facebook auth credentials
+  if (request.session.auth) {
+    // generate a uuid for socket association
+    var socket_id = uuid();
+    
+    // initialize facebook-client with the access token to gain access
+    // to helper methods for the REST api
+    var token = request.session.auth.facebook.accessToken;
+    facebook.getSessionByAccessToken(token)(function(session) {
+      //render product page
+      response.render('coupon.ejs', {
+        layout: false,
+        token: token,
+        app: fbapp,
+        coupon: coupon,
+        user: request.session.auth.facebook.user,
+        home: method + '://' + request.headers.host + '/',
+        redirect: method + '://' + request.headers.host + request.url,
+        socket_id: socket_id
+      });
+    });
+  } else {
+    // not logged in
+    response.render('coupon.ejs', {
+      layout: false,
+      token: null,
+      app: fbapp,
+      user: null,
+      coupon: coupon,
+      home: method + '://' + request.headers.host + '/',
+      redirect: method + '://' + request.headers.host + request.url,
+      socket_id: socket_id
+    });
+  }
+});
+
 //respond to POST /buy
 app.post('/buy', function(request, response) {
   // detect the http method uses so we can replicate it on redirects
