@@ -4,7 +4,7 @@
     <meta charset="utf-8">
 
     <!-- We get the name of the app out of the information fetched -->
-    <title><%= coupon.code %> - <%= coupon.name %></title>
+    <title><%= coupon.name %> with code '<%= coupon.code%>'</title>
     <link rel="stylesheet" href="/stylesheets/screen.css" media="screen">
 
     <!-- These are Open Graph tags.  They add meta data to your  -->
@@ -12,7 +12,7 @@
     <!-- over facebook.  You should fill these tags in with      -->
     <!-- your data.  To learn more about Open Graph, visit       -->
     <!-- 'https://developers.facebook.com/docs/opengraph/'       -->
-    <meta property="og:title" content="<%= coupon.code %> - <%= coupon.name %>"/>
+    <meta property="og:title" content="<%= coupon.name %> with code '<%= coupon.code%>'"/>
     <meta property="og:type" content="carshoppe:coupon"/>
     <meta property="og:url" content="<%= home %>coupons/<%= coupon.code %>"/>
     <meta property="og:image" content=""/>
@@ -70,7 +70,7 @@
         <!-- them ahead of time -->
         <p id="picture" style="background-image: url(https://graph.facebook.com/me/picture?type=normal&access_token=<%= token %>)"></p>
         <div>
-          <h1>Interesting selection, <strong><%= user.name %></strong></h1>
+          <h1>You found a coupon, <strong><%= user.name %></strong></h1>
           <p class="tagline"><%= app.name %></p>
           <div id="share-app">
             <p>Share your app:</p>
@@ -93,7 +93,7 @@
 
     <section id="guides" class="clearfix">
       <div>
-        <h1><%= coupon.code %> - <%= coupon.name %></h1>
+        <h1><%= coupon.name %> with code '<%= coupon.code%>'</h1>
         <h4><%= coupon.description %></h4>
         <div
           class="fb-like"
