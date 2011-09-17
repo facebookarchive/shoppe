@@ -275,7 +275,7 @@ app.post('/checkout', function(request, response) {
           '/me/carshoppe:purchase',
           {
             carpart: method + '://' + request.headers.host +
-                     'products/' + request.body.product
+                     '/products/' + request.body.product
           },
           'POST'
         )(function(result) {
