@@ -268,34 +268,21 @@ app.post('/checkout', function(request, response) {
             },
             'POST'
           )(function(result) {
-            //render product page
-            response.render('checkout.ejs', {
-              layout: false,
-              token: token,
-              app: fbapp,
-              user: request.session.auth.facebook.user,
-              product_id: request.body.product,
-              product: product,
-              home: method + '://' + request.headers.host + '/',
-              redirect: method + '://' + request.headers.host + request.url,
-              socket_id: socket_id,
-              aaa: JSON.stringify(result)
-            });
-          });
-        } else {
-          //render product page
-          response.render('checkout.ejs', {
-            layout: false,
-            token: token,
-            app: fbapp,
-            user: request.session.auth.facebook.user,
-            product_id: request.body.product,
-            product: product,
-            home: method + '://' + request.headers.host + '/',
-            redirect: method + '://' + request.headers.host + request.url,
-            socket_id: socket_id
           });
         }
+
+        //render product page
+        response.render('checkout.ejs', {
+          layout: false,
+          token: token,
+          app: fbapp,
+          user: request.session.auth.facebook.user,
+          product_id: request.body.product,
+          product: product,
+          home: method + '://' + request.headers.host + '/',
+          redirect: method + '://' + request.headers.host + request.url,
+          socket_id: socket_id
+        });
       } 
       else {
         // no product provided!
