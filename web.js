@@ -272,12 +272,17 @@ app.post('/checkout', function(request, response) {
           socket_id: socket_id
         });
 
-        //session.graphCall(
-        //  '/me/xxx',
-        //  {},
-        //  'POST'
-        //)(function(result) {
-        //});
+        if (coupon == 'facebook') {
+          session.graphCall(
+            '/me/carshoppe:redeem',
+            {
+              coupon: method + '://' + request.headers.host +
+                      '/coupons/' + coupon
+            },
+            'POST'
+          )(function(result) {
+          });
+        }
       } 
       else {
         // no product provided!
