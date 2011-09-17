@@ -179,8 +179,8 @@ header .tagline {
 
 /* =guides/samples spacing
 --------------------------------------------- */
-#guides h1,
-#samples h1 {
+#guides h1, #guides h2,
+#samples h1, #samples h2 {
   margin-bottom: 15px;
   text-align: center;
 }
