@@ -12,7 +12,7 @@ exports.Products = {
     price: 500
   },
   camshaft: {
-    name: 'Bosworth Stage 2 camshaft',
+    name: 'Bosworth Stage 2 camshafts',
     description: 'Amazing power without a lopey idle',
     image: 'cams.jpg',
     price: 1000
