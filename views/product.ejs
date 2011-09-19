@@ -98,7 +98,7 @@
           class="fb-like"
           data-href="<%= home %>products/<%= product_id %>"
           data-send="true"
-          data-width="500"
+          data-width="800"
           data-show-faces="true">
         </div>
         <div class="image">
@@ -118,7 +118,12 @@
     <section id="socialreviews" class="clearfix">
       <h1>Reviews</h1>
 
-      <div class="fb-comments" data-href="<%= home %>products/<%= product_id %>" data-num-posts="20" data-width="500"></div>
+      <div
+        class="fb-comments"
+        data-href="<%= home %>products/<%= product_id %>"
+        data-num-posts="50"
+        data-width="800">
+      </div>
     </section>
   </body>
 </html>
