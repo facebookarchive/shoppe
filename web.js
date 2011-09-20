@@ -19,7 +19,7 @@ var fbapp = {
 everyauth.facebook
   .appId(process.env.FACEBOOK_APP_ID)
   .appSecret(process.env.FACEBOOK_SECRET)
-  .scope('publish_actions,user_likes,user_photos,user_photo_video_tags')
+  .scope('publish_actions')
   .entryPath('/')
   .redirectPath('/home')
   .findOrCreateUser(function() {
